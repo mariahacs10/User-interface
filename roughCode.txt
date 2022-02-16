@@ -1,0 +1,1 @@
+This is the rough code for the image view in recycler view
