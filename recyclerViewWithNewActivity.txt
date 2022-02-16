@@ -25,10 +25,57 @@ Step 1. Modify the activity_main and write:
 </androidx.constraintlayout.widget.ConstraintLayout>
 (This will step up your recycler view)
 
-Step 2. Go create 3 java classes called, ProfileActivity, recyclerAdapter 
-and User. Go Under the recyclerAdapter and write:
+Step 2. Create the layout for one list item
+(Go create 2  layout resource files called list_items and profile_activity
+You want to go under the list_items and write:)
 
-package com.example.recyclerview;
+(The adapter needs the layout for one item in the list. 
+All the items use the same layout. You need to specify that list item layout in a separate layout resource file,
+because it is used by the adapter, separately from the RecyclerView.)
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/anime_name"
+        android:textColor="#633734"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="176dp"
+        android:layout_marginTop="40dp"
+        android:textSize="14sp"
+        android:textColor="#996a65"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+Step 3. Create an adapter
+ 
+(Go create 3 java classes called, ProfileActivity (used to open another activity), recyclerAdapter 
+and User. Go Under the recyclerAdapter and write: )
+
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,8 +97,10 @@ import java.util.ArrayList;
 
 public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyViewHolder> {
    
-   /*You need to store your data in the adapter*/
+  (belongs to step 6)
     private ArrayList<User> usersList;
+
+
     private RecyclerViewClickListener listener;
 
     public recyclerAdapter(ArrayList<User> usersList, RecyclerViewClickListener listener)
@@ -61,6 +110,7 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyView
     }
 
 
+Step 4. Create the Viewholder for the adapter
 
     /*You will need to create a ViewHolder for the adapter, this is a inner class inside the recyclerView*/
 
@@ -106,7 +156,10 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyView
     }
 }
 
-Step 3: Go under the User java class and write:
+Step 5,  Store your data in the adapter
+private ArrayList<User> usersList;
+
+Step 6: Go under the User java class and write:
 
 public class User {
 
@@ -128,8 +181,7 @@ public class User {
     }
 }
 
-Step 4. Go under the ProfileActivity and write:
-package com.example.recyclerview;
+Step 7. Go under the ProfileActivity and write:
 
 import android.os.Bundle;
 import android.widget.TextView;
@@ -159,51 +211,8 @@ public class ProfileActivity extends AppCompatActivity
 }
 
 
-Step 5. Go create 2  layout resource files called list_items and profile_activity
-You want to go under the list_items and write:
 
-(The adapter needs the layout for one item in the list. 
-All the items use the same layout. You need to specify that list item layout in a separate layout resource file,
-because it is used by the adapter, separately from the RecyclerView.)
-
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context=".MainActivity">
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="40dp"
-        android:text="@string/anime_name"
-        android:textColor="#633734"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="40dp"
-        android:textSize="14sp"
-        android:textColor="#996a65"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-</androidx.constraintlayout.widget.ConstraintLayout>
-
-Step 6.Now you want to go under the profile_activity and write:
+Step 8.Now you want to go under the profile_activity.xml and write:
 
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -224,7 +233,7 @@ Step 6.Now you want to go under the profile_activity and write:
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout> 
 
-Step 7. Now you want to go to where the MainActivity and this is where you need the recyclerView in the MainActivity
+Step 9. Now you want to go to where the MainActivity and this is where you need to put the recyclerView in the MainActivity
 package com.example.recyclerview;
 
 import androidx.appcompat.app.AppCompatActivity;
