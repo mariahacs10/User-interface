@@ -1,9 +1,4 @@
-I followed thiis Video link:
-https://www.youtube.com/watch?v=ASvTzjUZ3TE
+This is a recycler view with delete if you long press one of the items in the list
+you can delete it :-).
 
-the difference in this recyler view and the other one is the
-seperation of the views, in the first one, it used 
-(--------------------) to make the seperation and 
-that looked bulbus 
-
-this recyclerview does it the correct way
+Video link: https://www.youtube.com/watch?v=9rcrYFO1ogc
