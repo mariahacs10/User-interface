@@ -1,3 +1,0 @@
-This is how you implement a custom app theme:
-
-https://developer.android.com/codelabs/basic-android-kotlin-training-change-app-theme#2
