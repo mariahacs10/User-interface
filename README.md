@@ -1,4 +1,5 @@
-This is a recycler view with delete if you long press one of the items in the list
-you can delete it :-).
+This is a drawer activity first timne doing it it was a success :-)
 
-Video link: https://www.youtube.com/watch?v=9rcrYFO1ogc
+i am following the codelab of User navigation java
+
+Heres the link : https://developer.android.com/codelabs/android-training-provide-user-navigation#4
