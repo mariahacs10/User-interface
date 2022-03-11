@@ -1,0 +1,236 @@
+3/9/2022
+
+Step 1.Go under the activity_main and create a drawerlayout
+
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/drawer_layout"
+    tools:context=".MainActivity">
+
+Step 2. Go create a constraintlayout inside your drawerlayout and write
+ <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/main_activity"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+Step 3. Right click the layout folder and createe a new
+layout resource file called header_menu and write
+(And make sure its a linear layout):
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:padding="20dp"
+    android:background="#88C6C9">
+
+    //this class is your design class this is
+    //where your images and textviews and etc go
+
+    //this is your imageviw
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/cupofjava"/>
+
+    //This is your textView
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Coding is good"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:textStyle="bold"/>
+</LinearLayout>
+
+Step 4. right click the res folder(IT HAS IT BE THE RES FOLDER)
+and click Android resource file and call it menu_main, And change the
+Resource type to Menu (and you have to create vector assiets)
+now wrtie
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    //This class is going to display all your vector images and everything in here
+    //this is probably the MOST important class cause without this there will be
+    //nothing in the navigation bar
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_baseline_home_24"
+            android:title="Home" />
+
+        <item
+            android:id="@+id/nav_search"
+            android:icon="@drawable/ic_baseline_search_24"
+            android:title="Search" />
+
+        <item
+            android:id="@+id/nav_users"
+            android:icon="@drawable/ic_baseline_supervised_user_circle_24"
+            android:title="Users" />
+
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_baseline_assignment_ind_24"
+            android:title="Profile" />
+
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_baseline_settings_24"
+            android:title="Settings" />
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item android:title="Communicate">
+            <menu>
+                <group>
+                    <item android:title="Share" android:icon="@drawable/ic_baseline_share_24"
+                        android:id="@+id/nav_share"/>
+
+                    <item android:title="Donate" android:icon="@drawable/ic_baseline_home_repair_service_24"
+                        android:id="@+id/nav_donate"/>
+                </group>
+            </menu>
+        </item>
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item android:title="Authenticate">
+            <menu>
+                <group>
+                    <item android:title="Logout" android:icon="@drawable/ic_baseline_login_24"
+                        android:id="@+id/nav_logout"/>
+
+                </group>
+            </menu>
+        </item>
+    </group>
+</menu>
+
+Step 5. Now go under the activity_main again and add this code
+this is going to have  the navigation:
+  //This navigation is going to show you the list of resources
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/navigationView"
+        app:headerLayout="@layout/header_menu"
+        app:menu="@menu/main_menu"
+        android:fitsSystemWindows="true"
+        android:layout_gravity="start"/>
+
+Step 6. Now hop into the mainactivity and you want
+to delcare 3 new variables:
+
+ //Define your variables
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    ActionBarDrawerToggle actionBarDrawerToggle;
+
+Step 7. Now you need to access the resource files and to do this
+you need to write:
+
+  //this sets your reousrce values
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.navigationView);
+        //This going to tell if the drawer is open or closed
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.menu_Open, R.string.close_menu);
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        //going to sync and make sure everything is up to data
+        actionBarDrawerToggle.syncState();
+
+Step 8. Now for the comment line //This going to tell if the drawer is open or closed
+you need to go under the resource files and add the open and close
+to the strings.xml:
+
+    <string name="menu_Open">Open</string>
+    <string name="close_menu">Close</string>
+
+Step 9. Now you need to set a onClick so when the user clicks
+on a item you recive feedback:
+
+ navigationView.setNavigationItemSelectedListener(item -> {
+
+            //this is going to display something in the long cat
+            //everytime you click for example ther home button
+            //it will pop up in the log cat
+            switch(item.getItemId())
+            {
+                case R.id.nav_home:
+                    Log.i("MENU_DRAWER_TAG", "Home item is clicked");
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    break;
+
+                case R.id.nav_search:
+                    Log.i("MENU_DRAWER_TAG", "Search item is clicked");
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    break;
+
+                case R.id.nav_users:
+                    Log.i("MENU_DRAWER_TAG", "User item is clicked");
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    break;
+
+                case R.id.nav_profile:
+                    Log.i("MENU_DRAWER_TAG", "Profile item is clicked");
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    break;
+
+                case R.id.nav_settings:
+                    Log.i("MENU_DRAWER_TAG", "Settings item is clicked");
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    break;
+
+                case R.id.nav_share:
+                    Log.i("MENU_DRAWER_TAG", "Share item is clicked");
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    break;
+
+                case R.id.nav_donate:
+                    Log.i("MENU_DRAWER_TAG", "Donate item is clicked");
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    break;
+
+                case R.id.nav_logout:
+                    Log.i("MENU_DRAWER_TAG", "Logout item is clicked");
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    break;
+            }
+            //Then when your done return true
+            return true;
+        });
+
+Step 10.Now the final step is to go create a method inside the mainActivity
+called onOptionsItemSelected (this is NOT in the onCreate() its 
+above the onCreate());
+ //This will determine if you selected an item or not
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item)
+    {
+        if(actionBarDrawerToggle.onOptionsItemSelected(item))
+        {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+Now run it and you'll be happy 😃✨
+
+
