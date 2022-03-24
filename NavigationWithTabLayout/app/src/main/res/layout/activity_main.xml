@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--I followed this video:-->
+<!--    https://www.youtube.com/watch?v=VxsYMeTMClU&list=LL&index=12&t=62s-->
+<!--because i couldn't get the book to work and this works-->
+<!--and for some reason i used onCreateView and onViewCreated-->
+<!--but the book only used onCreateView.-->
+<!--Wonder if that was a problem. Well test
+if i have to have both onCreateView and onViewCreated
+or just one-->
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+    //The TabLayout comes from the
+    DesignSupportLibrary. You add
+    it to the AppBarLayout.
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    //Add the ViewPager2
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

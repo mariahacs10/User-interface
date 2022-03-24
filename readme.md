@@ -1,9 +1,5 @@
-Bits and pizzas app
+video link:https://www.youtube.com/watch?v=VxsYMeTMClU&list=LL&index=13&t=62s
 
-The difference between onCreateView and onViewCreated is
-
-       oncreateView is used to inflate the fragment,  you can also Inflate the XML 
-       layout for the Fragment in this callback.  The system calls this method to draw the Fragment
-       UI for the first time.
-        
-        onViewCreated gets findViewById and calls a view (textview,imageview, edittext etc)
+I learned alot from this video i learned that you need viewpager2
+instead of viewpager i learned different method's like the
+onCreateView and the onViewCreated
